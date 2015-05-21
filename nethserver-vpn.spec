@@ -1,7 +1,7 @@
 Summary: NethServer vpn configuration
 Name: nethserver-vpn
 Version: 1.1.4
-Release: 1
+Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
 Source0: %{name}-%{version}.tar.gz
@@ -9,7 +9,6 @@ BuildArch: noarch
 
 Requires: nethserver-directory
 
-BuildRequires: perl
 BuildRequires: nethserver-devtools 
 
 %description
@@ -23,17 +22,16 @@ NethServer vpn configuration
 perl createlinks
 
 %install
-rm -rf $RPM_BUILD_ROOT
-(cd root; find . -depth -print | cpio -dump $RPM_BUILD_ROOT)
-%{genfilelist} $RPM_BUILD_ROOT --dir /var/lib/nethserver/certs/clients 'attr(0740,srvmgr,adm)' > %{name}-%{version}-filelist
-echo "%doc COPYING" >> %{name}-%{version}-filelist
-
-%post
-
-%preun
+rm -rf %{buildroot}
+(cd root; find . -depth -print | cpio -dump %{buildroot})
+%{genfilelist} %{buildroot} \
+    --dir /var/lib/nethserver/certs/clients 'attr(0740,srvmgr,adm)' \
+    > %{name}-%{version}-filelist
 
 %files -f %{name}-%{version}-filelist
 %defattr(-,root,root)
+%doc COPYING
+%dir %{_nseventsdir}/%{name}-update
 
 %changelog
 * Fri Dec 12 2014 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.4-1.ns6
