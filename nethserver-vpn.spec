@@ -1,6 +1,6 @@
 Summary: NethServer vpn configuration
 Name: nethserver-vpn
-Version: 1.1.4
+Version: 1.1.7
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -34,6 +34,15 @@ rm -rf %{buildroot}
 %dir %{_nseventsdir}/%{name}-update
 
 %changelog
+* Tue Sep 29 2015 Davide Principi <davide.principi@nethesis.it> - 1.1.7-1
+- Make Italian language pack optional - Enhancement #3265 [NethServer]
+
+* Thu Jul 16 2015 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.6-1
+- IPsec tunnels (net2net) web interface - Feature #3194 [NethServer]
+
+* Wed Mar 11 2015 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.5-1
+- missing vpn certs in configuration backup - Enhancement #3071 [NethServer]
+
 * Fri Dec 12 2014 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.4-1.ns6
 - Creating a vpn user corrupts the system user with the same name - Bug #2974 [NethServer]
 
